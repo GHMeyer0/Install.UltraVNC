@@ -5,7 +5,7 @@ set ServidorDeploy=\\Excelenciajoi.local\netlogon\UltraVNC\
 
 REM Verificar se o vnc esta instalado
 
-if exist "C:\Program Files\UltraVNC" GOTO SAIR
+if exist "C:\Program Files\UltraVNC" GOTO END
 
 if not exist "C:\Program Files\UltraVNC" (
   mkdir "C:\Program Files\UltraVNC"
@@ -27,10 +27,13 @@ if not "%ProgramFiles(x86)%"=="" (goto x64) else (goto x86)
   start /wait %ServidorDeploy%UltraVNC_X86_Setup.exe /verysilent /loadinf=%ServidorDeploy%vncserver.inf /norestart
   goto fim
 
-:fim
+:END
   copy /Y "%ServidorDeploy%ultravnc.ini" "C:\Program Files\UltraVNC\ultravnc.ini"
   "C:\Program Files\UltraVNC\MSLogonACL.exe" /i /o "C:\Program Files\UltraVNC\acl.txt"
   net stop uvnc_service
   net start uvnc_service
-  rd /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\UltraVNC\"
+  if exist "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\UltraVNC\" (
+    rd /s /q "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\UltraVNC\"
+  )
+  
   exit
