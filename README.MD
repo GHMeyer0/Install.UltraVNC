@@ -1,0 +1,1 @@
+## Script de Instalação do UltraVNC usando GPO's e com autenticação pelo AD
