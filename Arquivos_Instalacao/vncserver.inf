@@ -5,4 +5,4 @@ Group=UltraVNC
 NoIcons=0
 SetupType=server_silent
 Components=ultravnc_server_s
-Tasks=installservice.startservice
+Tasks=installservice,startservice
